@@ -2,6 +2,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
+from drf_writable_nested.serializers import WritableNestedModelSerializer
+
+from core.models import Extended
+
+
+class ExtendedSerializer(WritableNestedModelSerializer):
+    class Meta:
+        model = Extended
+        exclude = ('user', )
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -9,10 +18,12 @@ class UserSerializer(serializers.ModelSerializer):
     Shows all fields for the User.
     Suitable for showing all User fields Default and Custom.
     """
+    extended = ExtendedSerializer()
 
     class Meta:
         model = User
         exclude = ('password',)
+        depth = 1
 
 
 class UserSimpleSerializer(serializers.ModelSerializer):
@@ -26,7 +37,9 @@ class UserSimpleSerializer(serializers.ModelSerializer):
         fields = ('id', 'username')
 
 
-class RegisterSerializer(serializers.ModelSerializer):
+class RegisterSerializer(WritableNestedModelSerializer):
+    extended = ExtendedSerializer(required=False)
+
     email = serializers.EmailField(
         required=False,
         default='',
@@ -45,7 +58,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name')
+        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'extended')
         extra_kwargs = {
             'first_name': {'required': False},
             'last_name': {'required': False},
@@ -69,13 +82,22 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
 
+        extended = validated_data.get('extended', {})
+        extended = Extended.objects.create(
+            user=user,
+            phone=extended.get('phone', None)
+        )
+        extended.save()
+
         return user
 
 
-class UpdateUserSerializer(serializers.ModelSerializer):
+class UpdateUserSerializer(WritableNestedModelSerializer):
+    extended = ExtendedSerializer()
+
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name')
+        fields = ('username', 'email', 'first_name', 'last_name', 'extended')
         extra_kwargs = {
             'username': {'required': False},
             'first_name': {'required': False},

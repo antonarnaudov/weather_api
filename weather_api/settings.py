@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     'core',
-    'weather',
+    'city_weather',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'weather-api-db',
         'USER': 'postgres',
-        'PASSWORD': '1234',
+        'PASSWORD': 'toni1o00',
         'HOST': 'localhost',
         'PORT': '5432',
         'TEST': {
