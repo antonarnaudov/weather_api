@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
+from django.db import transaction
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from core.models import Extended
 from core.utils.mixins import SerializerRequestSwitchMixin
 from core.serializers import RegisterSerializer, UserSerializer, UserSimpleSerializer, \
     UpdateUserSerializer
@@ -29,6 +31,7 @@ class UserViewSet(SerializerRequestSwitchMixin, ModelViewSet):
             self.kwargs['pk'] = request.user.pk
         return super().retrieve(request, *args, **kwargs)
 
+    @transaction.atomic()
     def create(self, request, *args, **kwargs):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
