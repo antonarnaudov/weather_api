@@ -1,25 +1,13 @@
 import django_filters
-from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
+from datetime import datetime, timedelta
 from rest_framework.filters import OrderingFilter
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from city_weather.models import CityWeather
 from city_weather.serializers import CityWeatherSerializer
-import requests
-from rest_framework import status
-from django.conf import settings
-from datetime import datetime, timedelta
 
-
-def get_openweathermap_city_weather(city):
-    request = requests.get(
-        f'{settings.OWM_API}?q={city}&appid={settings.OWM_API_KEY}&units={settings.OWM_DEFAULT_UNITS}')
-
-    if request.status_code == status.HTTP_404_NOT_FOUND:
-        raise Http404()
-
-    return request, request.json()
+from core.utils.open_weather_map_api import get_openweathermap_city_weather
 
 
 class CityWeatherFilter(django_filters.FilterSet):
