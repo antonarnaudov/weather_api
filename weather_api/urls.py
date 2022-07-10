@@ -40,6 +40,7 @@ urlpatterns = [
     path('', index_page, name='index page'),
 
     path('api/', include('core.urls')),
+    path('api/', include('city_weather.urls')),
 
     # Swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

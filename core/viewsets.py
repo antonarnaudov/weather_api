@@ -5,7 +5,6 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from core.models import Extended
 from core.utils.mixins import SerializerRequestSwitchMixin
 from core.serializers import RegisterSerializer, UserSerializer, UserSimpleSerializer, \
     UpdateUserSerializer
@@ -22,7 +21,7 @@ class UserViewSet(SerializerRequestSwitchMixin, ModelViewSet):
 
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
 
-    search_fields = ('username',)
+    search_fields = ('username', 'email', 'first', 'last')
     ordering_fields = ''
     ordering = 'id'
 

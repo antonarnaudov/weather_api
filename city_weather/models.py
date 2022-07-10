@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class CityWeather(models.Model):
+    weather = models.JSONField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
