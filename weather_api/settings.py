@@ -22,6 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)o6e@-%)s&58fv1n1aq54eu22q2e^b34!#lxgo1w3=3tp%f4d)'
 
+# SECURITY WARNING: keep the Open Weather Map API KEY used in production secret!
+OWM_API_KEY = 'beed0a6079c92d7a04fd99051d75a398'
+
+# Open Weather Map API URL
+OWM_API_URL = 'https://api.openweathermap.org/data/2.5/weather/'
+
+# Open Weather Map Units choices are [ standard / metric / imperial ]
+OWM_DEFAULT_UNITS = 'metric'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
