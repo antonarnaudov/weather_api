@@ -12,6 +12,7 @@ def custom_exception_handler(exc, context):
     """Custom Error Exception Handler"""
     response = exception_handler(exc, context)
 
+    # Both lists can be extended if needed
     error_400_list = [ValidationError, ValueError, IntegrityError, ObjectDoesNotExist, KeyError, AttributeError,
                       EmailValidationError]
     error_404_list = [ProgrammingError, Http404]

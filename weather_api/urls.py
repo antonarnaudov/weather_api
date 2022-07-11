@@ -34,13 +34,19 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
+api = 'api/'  # Project API base route
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
+    # Base root page
     path('', index_page, name='index page'),
 
-    path('api/', include('core.urls')),
-    path('api/', include('city_weather.urls')),
+    # Django and Rest routs
+    path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+
+    # API Routers and urls
+    path(api, include('core.urls')), # core app urls
+    path(api, include('city_weather.urls')), # city_weather app urls
 
     # Swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

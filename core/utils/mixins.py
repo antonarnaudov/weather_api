@@ -1,6 +1,12 @@
 class SerializerRequestSwitchMixin:
     """
-    show is the default serializer
+    Allows developer to show different serializers based on user request
+
+    NOTE: Can be extended to be controlled via froned requests such as ?serializer=detailed
+
+    HOW TO USE: Include serializers with at least "show" paramether inside your viewset
+
+    NOTE: show is the default serializer
     serializers = {
         'show': ShowSerializer,
         'create': CreateSerializer,
