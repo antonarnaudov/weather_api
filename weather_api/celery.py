@@ -26,6 +26,3 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
-
-# celery -A weather_api worker -l info --pool=solo
-# celery -A weather_api beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
