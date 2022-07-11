@@ -51,3 +51,5 @@ class CityWeatherViewSet(ReadOnlyModelViewSet):
     serializer_class = CityWeatherSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = CityWeatherFilter
+    ordering_fields = ''
+    ordering = 'id'

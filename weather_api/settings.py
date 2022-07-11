@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'rest_framework_simplejwt',
-    'djcelery',
     'django_celery_beat',
 
     'core',
