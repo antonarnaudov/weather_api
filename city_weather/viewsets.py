@@ -23,9 +23,9 @@ class CityWeatherFilter(django_filters.FilterSet):
 
         - If match has been updated more than 4 hours in the past, it receives update with data from Open Weather Map API
         """
-
+        
         filtered = qs.filter(weather__name__icontains=value)  # Filters JSONField by city case-insensitive
-
+        
         if not filtered:  # If city not in db
             request, data = get_openweathermap_city_weather(value)  # Fetch data from openweathermap
 
@@ -51,3 +51,5 @@ class CityWeatherViewSet(ReadOnlyModelViewSet):
     serializer_class = CityWeatherSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = CityWeatherFilter
+    ordering_fields = ''
+    ordering = 'id'
