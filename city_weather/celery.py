@@ -6,6 +6,7 @@ from datetime import timedelta, datetime
 
 @app.task
 def update_city_weather_data():
+    """Celery task that fetches the latest weather data per city in the db and updates it"""
     all_cities = CityWeather.objects.all()
 
     for city in all_cities:

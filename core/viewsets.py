@@ -11,6 +11,7 @@ from core.serializers import RegisterSerializer, UserSerializer, UserSimpleSeria
 
 
 class UserViewSet(SerializerRequestSwitchMixin, ModelViewSet):
+    """Full CRUD User ViewSet with overridden default behaviours"""
     queryset = User.objects.all()
     serializers = {
         'show': UserSimpleSerializer,
@@ -26,12 +27,16 @@ class UserViewSet(SerializerRequestSwitchMixin, ModelViewSet):
     ordering = 'id'
 
     def retrieve(self, request, *args, **kwargs):
+        """Allows user to see detailed information for other users"""
         if self.kwargs['pk'] == '0':
             self.kwargs['pk'] = request.user.pk
         return super().retrieve(request, *args, **kwargs)
 
     @transaction.atomic()
     def create(self, request, *args, **kwargs):
+        """
+        Serves as user registration endpoint
+        """
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()

@@ -9,6 +9,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'weather_api.settings')
 
 app = Celery('weather_api', include=['city_weather.celery'])
 
+# Dict with Scheduled Celery tasks - extend only with Scheduled tasks
 app.conf.beat_schedule = {
     "update_city_weather_data_per_day": {
         "task": "city_weather.celery.update_city_weather_data",
