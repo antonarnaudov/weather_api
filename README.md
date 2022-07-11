@@ -163,7 +163,7 @@
 token pair to prove the authentication of those credentials.
 
 #### Get token
-**POST:** `api/auth/login/`
+**POST:** `api/auth/login/`<br/>
 ***Expects:*** 
 ```json
 {
@@ -179,7 +179,7 @@ token pair to prove the authentication of those credentials.
 }
 ```
 #### **Refresh token**
-**POST:** `api/auth/refresh/`<br />
+**POST:** `api/auth/refresh/`<br/>
 ***Expects:***
 ```json
 {
