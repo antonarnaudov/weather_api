@@ -256,8 +256,8 @@ celery -A weather_api worker -l info
 2. Open weather_api > celery.py and register your worker inside app.conf.beat_schedule following this structure
 ```js
 "example_worker_runs_every_minute": {
-	"task": "app.file.worker_function",
-	"schedule": 60.0 # schedule expects seconds
+    "task": "app.file.worker_function",
+    "schedule": 60.0 # schedule expects seconds
 }
 ```
 
