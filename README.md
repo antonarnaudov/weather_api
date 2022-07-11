@@ -121,7 +121,7 @@
 
 **Read Only:** `api/cityweather/`
 
-**Detailed:** `api/cityweather/{id}`
+**Detailed:** `api/cityweather/{id}/`
 <br/>
 ![search](https://img.icons8.com/officexs/16/1A1A1A/search.png) **Search by city:** `api/cityweather/?city=sofia`
 
@@ -130,7 +130,7 @@
 
 > Provides endpoints for user profile management
 
-**CRUD:** `/auth/user/`
+**CRUD:** `api/auth/user/`
 ```json
 {
   "id": 1,
@@ -163,7 +163,7 @@
 token pair to prove the authentication of those credentials.
 
 #### Get token
-**POST:** `api/auth/login`
+**POST:** `api/auth/login/`
 ***Expects:*** 
 ```json
 {
@@ -179,7 +179,7 @@ token pair to prove the authentication of those credentials.
 }
 ```
 #### **Refresh token**
-**POST:** `api/auth/refresh`<br />
+**POST:** `api/auth/refresh/`<br />
 ***Expects:***
 ```json
 {
@@ -206,7 +206,7 @@ Token Lifespan:
 
 > Auto-generated documentation for all accessible endpoints
 
-**GET:** `api/swagger`
+**GET:** `api/swagger/`
 
 ## **Celery Tasks**
 
