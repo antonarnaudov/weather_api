@@ -14,5 +14,5 @@ def update_city_weather_data():
         city.weather = data  # Updates weather data
         city.save()  # Saves updated data
 
-    print(f'>>> CityWeather data updated at {datetime.strftime(datetime.now(), "%m/%d/%Y %H:%M:%S")}')
-    print(f'>>> Next Update scheduled for {datetime.strftime(datetime.now() + timedelta(days=1), "%m/%d/%Y %H:%M:%S")}')
+    print(f'>>> CityWeather data updated at {datetime.strftime(datetime.utcnow(), "%m/%d/%Y %H:%M:%S")}')
+    print(f'>>> Next Update scheduled for {datetime.strftime(datetime.utcnow() + timedelta(days=1), "%m/%d/%Y %H:%M:%S")}')
