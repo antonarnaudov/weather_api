@@ -285,6 +285,7 @@ celery -A weather_api worker -l info --pool=solo
 ```bash
 celery -A weather_api worker -l info
 ```
+***NOTE:*** Go to `weather_api > celery` and change `update_city_weather_data_per_day` **schedule** to *60 seconds* to see instant result.
 
 ### **Add new scheduled tasks:**
 
