@@ -32,7 +32,7 @@ class CityWeatherFilter(django_filters.FilterSet):
             CityWeather.objects.create(weather=data)  # Store data in db
             filtered = qs.filter(weather__name__icontains=value)  # Refresh qs to get the new city weather
 
-        elif filtered[0].updated_at.replace(tzinfo=None) <= datetime.now() - timedelta(hours=4):  # If info outdated
+        elif filtered[0].updated_at.replace(tzinfo=None) <= datetime.utcnow() - timedelta(hours=4):  # If info outdated
             request, data = get_openweathermap_city_weather(value)  # Fetch data from openweathermap
             filtered[0].weather = data  # Updates weather data
             filtered[0].save()  # Saves updated data
