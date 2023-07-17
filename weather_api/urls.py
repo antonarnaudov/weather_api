@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from django.conf import settings
+from django.conf.urls.static import static
 
 from core.views import index_page
 
@@ -45,11 +47,15 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     # API Routers and urls
-    path(api, include('core.urls')), # core app urls
-    path(api, include('city_weather.urls')), # city_weather app urls
+    path(api, include('core.urls')),  # core app urls
+    path(api, include('city_weather.urls')),  # city_weather app urls
 
     # Swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
 ]
+
+# add at the last
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
